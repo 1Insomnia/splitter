@@ -1,12 +1,12 @@
-const SubmitButton = ({ callBack }) => {
+const SubmitButton = () => {
   return (
     <button
       type="submit"
-      className="block bg-cyan-dark text-cyan-light py-3 w-full rounded-md mt-8 text-sm"
+      className="block bg-cyan-light text-cyan-dark py-3 w-full rounded-md mt-8 text-sm"
     >
       Submit
     </button>
-  );
-};
+  )
+}
 
-export default SubmitButton;
+export default SubmitButton

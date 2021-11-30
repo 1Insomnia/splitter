@@ -1,24 +1,23 @@
-import { useRef, useState } from "react";
-import PropTypes from "prop-types";
+import { useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 
-import PercentButtonList from "./PercentButtonList";
-import SubmitButton from "./SubmitButton";
-import Label from "./Label";
-import Input from "./Input";
-import Result from "./Result";
+import PercentButtonList from './PercentButtonList'
+import Label from './Label'
+import Input from './Input'
+import Result from './Result'
 
-const percentValues = [0.1, 0.15, 0.2, 0.25];
+const percentValues = [0.1, 0.15, 0.2, 0.25]
 
 const Form = ({ setTip }) => {
-  const billRef = useRef(0);
-  const peopleRef = useRef(0);
-  const [percent, setPercent] = useState(5);
+  const billRef = useRef(0)
+  const peopleRef = useRef(0)
+  const [percent, setPercent] = useState(5)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
 
-    const billValue = parseInt(billRef.current.value);
-    const peopleValue = parseInt(billRef.current.value);
+    const billValue = parseInt(billRef.current.value)
+    const peopleValue = parseInt(billRef.current.value)
 
     if (
       !isNaN(billValue) &&
@@ -29,9 +28,9 @@ const Form = ({ setTip }) => {
       setTip(
         (parseInt(billRef.current.value) * percent) /
           parseInt(peopleRef.current.value)
-      );
+      )
     }
-  };
+  }
 
   return (
     <form
@@ -58,14 +57,13 @@ const Form = ({ setTip }) => {
         placeholder="0"
         refTarget={peopleRef}
       />
-      <SubmitButton />
       <Result />
     </form>
-  );
-};
+  )
+}
 
 Form.propTypes = {
-  setTip: PropTypes.func,
-};
+  setTip: PropTypes.func
+}
 
-export default Form;
+export default Form

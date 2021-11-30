@@ -4,22 +4,22 @@ module.exports = {
   theme: {
     colors: {
       cyan: {
-        light: "#c5e4e7",
-        DEFAULT: "#25c2ad",
-        dark: "#00474b",
+        light: '#c5e4e7',
+        DEFAULT: '#25c2ad',
+        dark: '#00474b'
       },
       light: {
-        DEFAULT: "#fafafa",
-        dark: "#f3f8fc",
+        DEFAULT: '#fafafa',
+        dark: '#f3f8fc'
       },
       gray: {
-        DEFAULT: "#f4f8fb",
-      },
+        DEFAULT: '#f4f8fb'
+      }
     },
-    extend: {},
+    extend: {}
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
-};
+  plugins: []
+}

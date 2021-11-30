@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const Label = ({ htmlFor, text }) => {
   return (
@@ -8,7 +9,12 @@ const Label = ({ htmlFor, text }) => {
     >
       {text}
     </label>
-  );
-};
+  )
+}
 
-export default Label;
+Label.propTypes = {
+  htmlFor: PropTypes.string,
+  text: PropTypes.string
+}
+
+export default Label

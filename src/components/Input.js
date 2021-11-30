@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const Input = ({ refTarget, type, id, name, placeholder }) => {
   return (
@@ -12,7 +13,14 @@ const Input = ({ refTarget, type, id, name, placeholder }) => {
         ref={refTarget}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+Input.propTypes = {
+  refTarget: PropTypes.object,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string
+}
+
+export default Input

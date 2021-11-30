@@ -1,5 +1,6 @@
-import React from "react";
-import PercentButton from "./PercentButton";
+import PropTypes from 'prop-types'
+import React from 'react'
+import PercentButton from './PercentButton'
 
 const PercentButtonList = ({ percentValues, setPercent }) => {
   return (
@@ -8,7 +9,12 @@ const PercentButtonList = ({ percentValues, setPercent }) => {
         <PercentButton value={pv} setPercent={setPercent} key={index} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default PercentButtonList;
+PercentButtonList.propTypes = {
+  percentValues: PropTypes.array,
+  setPercent: PropTypes.func
+}
+
+export default PercentButtonList
