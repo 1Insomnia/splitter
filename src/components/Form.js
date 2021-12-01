@@ -1,69 +1,91 @@
-import { useRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 import PercentButtonList from './PercentButtonList'
 import Label from './Label'
 import Input from './Input'
 import Result from './Result'
 
-const percentValues = [0.1, 0.15, 0.2, 0.25]
+const validationRules = {
+  bill: Yup.number().required('Required'),
+  people: Yup.number().required('Required')
+}
 
-const Form = ({ setTip }) => {
-  const billRef = useRef(0)
-  const peopleRef = useRef(0)
-  const [percent, setPercent] = useState(5)
+const Form = () => {
+  const [buttonsState, setButtonsState] = useState([
+    {
+      id: 1,
+      value: 0.1,
+      active: true
+    },
+    {
+      id: 2,
+      value: 0.15,
+      active: false
+    },
+    {
+      id: 3,
+      value: 0.25,
+      active: false
+    },
+    {
+      id: 4,
+      value: 0.5,
+      active: false
+    }
+  ])
+  const [percent, setPercent] = useState(10)
+  const [tip, setTip] = useState(0)
+  const [total, setTotal] = useState(0)
 
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    const billValue = parseInt(billRef.current.value)
-    const peopleValue = parseInt(billRef.current.value)
-
-    if (
-      !isNaN(billValue) &&
-      billValue !== 0 &&
-      !isNaN(peopleValue) &&
-      peopleValue !== 0
-    ) {
-      setTip(
-        (parseInt(billRef.current.value) * percent) /
-          parseInt(peopleRef.current.value)
+  const formik = useFormik({
+    initialValues: {
+      bill: 0,
+      people: 0
+    },
+    validationSchema: Yup.object(validationRules),
+    onSubmit: values => {
+      setTip((values.bill * percent) / values.people)
+      setTotal(
+        values.bill / values.people + (values.bill * percent) / values.people
       )
     }
-  }
+  })
 
   return (
     <form
-      className="p-4 bg-light shadow-lg rounded-xl max-w-2xl mx-auto"
-      onSubmit={handleSubmit}
+      className="p-4 bg-light shadow-lg rounded-xl max-w-3xl mx-auto lg:flex lg:gap-8 lg:p-8"
+      onSubmit={formik.handleSubmit}
     >
-      <Label htmlFor="bill" text="Bill" />
-      <Input
-        type="number"
-        id="bill"
-        name="bill"
-        refTarget={billRef}
-        placeholder="0"
-      />
-      <PercentButtonList
-        setPercent={setPercent}
-        percentValues={percentValues}
-      />
-      <Label htmlFor="people" text="Number of people" />
-      <Input
-        type="number"
-        id="people"
-        name="people"
-        placeholder="0"
-        refTarget={peopleRef}
-      />
-      <Result />
+      <div className="lg:flex-1">
+        <Label htmlFor="bill" text="Bill" />
+        <Input
+          type="number"
+          id="bill"
+          name="bill"
+          placeholder="0"
+          onChange={formik.handleChange}
+          value={formik.values.bill}
+        />
+        <PercentButtonList
+          buttonsState={buttonsState}
+          setButtonsState={setButtonsState}
+          setPercent={setPercent}
+        />
+        <Label htmlFor="people" text="Number of people" />
+        <Input
+          type="number"
+          id="people"
+          name="people"
+          placeholder="0"
+          onChange={formik.handleChange}
+          value={formik.values.people}
+        />
+      </div>
+      <Result total={total} tip={tip} />
     </form>
   )
-}
-
-Form.propTypes = {
-  setTip: PropTypes.func
 }
 
 export default Form

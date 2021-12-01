@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import PercentButton from './PercentButton'
 
-const PercentButtonList = ({ percentValues, setPercent }) => {
+const PercentButtonList = ({ buttonsState, setPercent, setButtonsState }) => {
   return (
     <div className="flex gap-2 my-8">
-      {percentValues.map((pv, index) => (
-        <PercentButton value={pv} setPercent={setPercent} key={index} />
+      {buttonsState.map(button => (
+        <PercentButton
+          {...button}
+          setPercent={setPercent}
+          setButtonsState={setButtonsState}
+          key={button.id}
+        />
       ))}
     </div>
   )
